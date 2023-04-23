@@ -1,0 +1,15 @@
+{
+    "name": "pure-intento/printify-sdk",
+    "description": "This is sdk for printify.com api",
+    "autoload": {
+        "psr-4": {
+            "PureIntento\\PrintifySdk\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.1"
+    }
+}
