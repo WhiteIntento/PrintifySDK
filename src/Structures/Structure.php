@@ -52,7 +52,7 @@ class Structure{
                 continue;
             }
             if(!array_key_exists($value,$attributes)){
-                throw new \PureIntento\PrintifySdk\Exceptions\MissingRequiredAttribute("Missing ". $key);
+                throw new \PureIntento\PrintifySdk\Exceptions\MissingRequiredAttribute("Missing ". $value);
             }
         }
     }

@@ -50,7 +50,14 @@ class PrintifyClient{
         return $this->client;
     }
 
-    public function request($path,$method="GET",$options=[]){
-        return (new Query($this->client))->request($this->apiUrl . "/" . $path,$method,$options);
+    public function request($path,$method="GET",$options=[]): Query{
+        $q=(new Query($this->client))->request($this->apiUrl . "/" . $path,$method,$options);
+        if($q->status==false){
+            $error=$q->getError();
+            if($error != null){
+                throw new Exceptions\PrintifyError($error);
+            }
+        }
+        return $q;
     }
 }

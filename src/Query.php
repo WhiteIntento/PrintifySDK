@@ -26,6 +26,14 @@ class Query{
         return $this;
     }
 
+    public function getError() : string | null{
+        $response=$this->getArrayResponse();
+        if(array_key_exists("error",$response)){
+            return $response["error"];
+        }
+        return null;
+    }
+
     public function getArrayResponse() : array{
         $json=json_decode($this->response->getBody(),true);
         if(!is_null($json)){

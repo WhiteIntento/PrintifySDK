@@ -13,7 +13,8 @@ class Catalog{
      * Retrieve a specific blueprint
      */
     public function blueprint($id,$options = []) : Structures\Blueprint{
-        $array=$this->client->request(APIPath::blueprint($id), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::blueprint($id), "GET", $options)->getArrayResponse();
+        print_r($array);
         return new Structures\Blueprint($array);
     }
 
@@ -22,14 +23,14 @@ class Catalog{
      */
 
     public function blueprints($options = []) : StructureCollection{
-        $array=$this->client->request(APIPath::blueprints(), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::blueprints(), "GET", $options)->getArrayResponse();
         return new StructureCollection(Structures\Blueprint::class,$array);
     }
     /**
      * Retrieve a list of all print providers that fulfill orders for a specific blueprint
      */
     public function blueprintProviders($blueprintId,$options = []) : StructureCollection{
-        $array=$this->client->request(APIPath::blueprintProviders($blueprintId), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::blueprintProviders($blueprintId), "GET", $options)->getArrayResponse();
         return new StructureCollection(Structures\PrintProvider::class,$array);
     }
     
@@ -37,7 +38,7 @@ class Catalog{
      * Retrieve a list of all variants of a blueprint from a specific print provider
      */
     public function blueprintProviderVariants($blueprintId, $printProviderId,$options = []) : StructureCollection{
-        $array=$this->client->request(APIPath::blueprintProviderVariants($blueprintId,$printProviderId), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::blueprintProviderVariants($blueprintId,$printProviderId), "GET", $options)->getArrayResponse();
         if(!array_key_exists("variants",$array)){
             throw new Exceptions\MissingRequiredAttribute("In api response the variants attribute is missing");
         }
@@ -48,7 +49,7 @@ class Catalog{
      * Retrieve the shipping information for all variants of a blueprint from a specific print provider
      */
     public function blueprintProviderShipping($blueprintId, $printProviderId,$options = []) : Structures\BlueprintProviderShipping{
-        $array=$this->client->request(APIPath::blueprintProviderShipping($blueprintId,$printProviderId), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::blueprintProviderShipping($blueprintId,$printProviderId), "GET", $options)->getArrayResponse();
         if(!array_key_exists("profiles",$array)){
             throw new Exceptions\MissingRequiredAttribute("In api response the profiles attribute is missing");
         }
@@ -64,7 +65,7 @@ class Catalog{
      * Retrieve a list of all available print-providers
      */
     public function printProviders($options=[]) : StructureCollection{
-        $array=$this->client->request(APIPath::printProviders(), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::printProviders(), "GET", $options)->getArrayResponse();
         return new StructureCollection(Structures\PrintProvider::class,$array);
     }
 
@@ -72,7 +73,7 @@ class Catalog{
      * Retrieve a specific print-provider and a list of associated blueprint offerings
      */
     public function printProvider($id,$options=[]) : Structures\PrintProvider{
-        $array=$this->client->request(APIPath::printProvider($id), "GET", $options)->getArrayResponse();
+        $array=$this->client->request(APICatalogPath::printProvider($id), "GET", $options)->getArrayResponse();
         return new Structures\PrintProvider($array);
     }
 }
