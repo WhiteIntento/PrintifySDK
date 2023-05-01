@@ -46,15 +46,16 @@ print_r($shop->deleteShop($shopId));
 ```
 
 <h2>Product</h2>
-```
-    $product= new Product($request);
+```php
 
-    //Revice a list of products
-    $shopId=8694565;
-    print_r($product->products(8694565));
+$product= new Product($request);
 
-    ////Revice a specific product
-    $productId="6440b092312ec5473b05598b";
-    $specificProduct=$product->product($shopId,$productId);
-    print_r($specificProduct);
+//Retrive a list of products
+$shopId=8694565;
+print_r($product->products(8694565));
+
+//Retrive a specific product
+$productId="6440b092312ec5473b05598b";
+$specificProduct=$product->product($shopId,$productId);
+print_r($specificProduct);
 ```
