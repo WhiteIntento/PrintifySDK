@@ -46,6 +46,7 @@ print_r($shop->deleteShop($shopId));
 ```
 
 <h2>Product</h2>
+
 ```php
 
 $product= new Product($request);
@@ -58,4 +59,6 @@ print_r($product->products(8694565));
 $productId="6440b092312ec5473b05598b";
 $specificProduct=$product->product($shopId,$productId);
 print_r($specificProduct);
+
+
 ```
