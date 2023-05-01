@@ -43,4 +43,10 @@ $shopId=2;
 print_r($shop->deleteShop($shopId));
 
 
+use PureIntento\PrintifySdk\Product;
+$product= new Product($request);
+$shopId=8694565;
+print_r($product->products($shopId));
+
+
 ```
