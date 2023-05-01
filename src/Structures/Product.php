@@ -2,7 +2,7 @@
 namespace PureIntento\PrintifySdk\Structures;
 
 
-class Product{
+class Product extends Structure{
     protected array $requiredAttributes = [
         "id",
         "title",

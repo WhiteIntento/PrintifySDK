@@ -8,15 +8,6 @@ class Product{
     public function __construct(PrintifyClient $client){
         $this->client=$client;
     }
-    
-    /**
-     * Retrieve a specific blueprint
-     */
-    public function blueprint($id,$options = []) : Structures\Blueprint{
-        $array=$this->client->request(APIPath::blueprint($id), "GET", $options)->getArrayResponse();
-        return new Structures\Blueprint($array);
-    }
-
 
     /**
      * Retrive a list of products
@@ -28,5 +19,17 @@ class Product{
         $array=$this->client->request(APIProductPath::products($shopId), "GET", $options)->getArrayResponse();
         return new StructureCollection(Structures\Product::class,$array);
     }
+
+    /**
+     * Retrive a specific product
+     * @param $shopId
+     * @param $productId
+     * @return Product
+     */
+    public function product($shopId,$productId,$options = []) : Structures\Product{
+        $array=$this->client->request(APIProductPath::product($shopId,$productId), "GET", $options)->getArrayResponse();
+        return new Structures\Product($array);
+    }
+
   
 }

@@ -43,10 +43,18 @@ $shopId=2;
 print_r($shop->deleteShop($shopId));
 
 
-use PureIntento\PrintifySdk\Product;
-$product= new Product($request);
-$shopId=8694565;
-print_r($product->products($shopId));
+```
 
+<h2>Product</h2>
+```
+    $product= new Product($request);
 
+    //Revice a list of products
+    $shopId=8694565;
+    print_r($product->products(8694565));
+
+    ////Revice a specific product
+    $productId="6440b092312ec5473b05598b";
+    $specificProduct=$product->product($shopId,$productId);
+    print_r($specificProduct);
 ```
