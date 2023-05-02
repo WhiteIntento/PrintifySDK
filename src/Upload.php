@@ -36,6 +36,11 @@ class Upload{
         return bin2hex(random_bytes($size));
     }
 
+    /**
+     * Upload image by url address
+     * @return array
+     */
+
     public function uploadImageByUrl($url,$fileName=null,$options=[]) : array{
         if (!filter_var($url, FILTER_VALIDATE_URL) !== false) {
             throw new \InvalidArgumentException("url must be valid");
@@ -48,6 +53,11 @@ class Upload{
         $array=$this->client->request(APIUploadPath::uploadImage(),"POST",$options)->getArrayResponse();
         return $array;
     }
+
+    /**
+     * Upload image by base64 content
+     * @return array
+     */
 
     public function uploadImageByBase64($base64Conent, $fileName=null,$options=[]) : array{
         if($fileName==null){

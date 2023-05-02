@@ -62,3 +62,32 @@ print_r($specificProduct);
 
 
 ```
+
+<h2>Upload Image</h2>
+
+```php
+
+use PureIntento\PrintifySdk\Upload;
+
+$upload= new Upload($request);
+
+
+//Retrive a list to  uploaded images
+print_r($upload->uploadedImages([
+    "query"=>[
+        "page"=>1
+    ]
+]));
+
+
+//Retrive a specific uploaded image
+print_r($upload->uploadedImage("64248f5782e54a4934c2121e"));
+
+
+//Upload image by url address
+print_r($upload->uploadImageByUrl("https://pbs.twimg.com/media/DeDxDEcW0AET15l.jpg"));
+
+//Upload image by base64 content
+print_r($upload->uploadImageByBase64("BASE64 CONTENT HERE"));
+
+```
