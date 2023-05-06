@@ -60,5 +60,9 @@ class StructureCollection implements \ArrayAccess, \Countable, \Iterator {
     public function valid() : bool {
       return isset($this->items[$this->position]);
     }
+
+    public function toArray(){
+      return $this->items;
+    }
   }
   

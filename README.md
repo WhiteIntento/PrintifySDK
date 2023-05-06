@@ -91,3 +91,59 @@ print_r($upload->uploadImageByUrl("https://pbs.twimg.com/media/DeDxDEcW0AET15l.j
 print_r($upload->uploadImageByBase64("BASE64 CONTENT HERE"));
 
 ```
+
+
+<h2>Create Product</h2>
+
+```php
+use PureIntento\PrintifySdk\Structures\Templates\ProductCreationTemplate;
+use PureIntento\PrintifySdk\Structures\Templates\PrintAreaTemplate;
+use PureIntento\PrintifySdk\Structures\Templates\ImageTemplate;
+use PureIntento\PrintifySdk\Product;
+
+
+
+$blueprintId=384;
+$printProviderId=1;
+
+$pct=new ProductCreationTemplate("Product Name","Product description",$blueprintId,$printProviderId);
+
+
+$bluePrintVariantId=45740;
+$price=1000;
+$isEnabled=true;
+
+/*
+    Този метод добавя вариянт на printprovider за конкретния blueprint
+    This method adds a printprovider variant for the specific blueprint
+*/
+$pct->addVariant($bluePrintVariantId,$price,$isEnabled);
+
+
+
+$blueprintVariantIds=[
+    45740
+];
+/**
+ * Този class описва как да се се визуализират снимките. Тяхната позиция размер и кои снимки да бъдат добавени.
+ * This class describes how to render pictures. Their item size and which photos to add.
+ */
+$pat=new PrintAreaTemplate($blueprintVariantIds);
+$position="front";
+$images=[
+    /*
+        Този class създава дизайн на снимката в която се посочва идентификатора на снимката
+        нейното разположение на кординати x и y. Също така нейната scale и ъгълът на въртене предполагам от 0 до 360 градуса.
+        This class creates a photo design specifying the photo ID
+        its location in x and y coordinates. Also its scale and angle of rotation I guess from 0 to 360 degrees.
+    */
+    new ImageTemplate("IMAGE ID WHO CAN BE GETTED FROM Upload class","x","y","scale","angle")
+];
+
+$pat->addPlaceholder("Blueprint Provider variant position. For example, it can be front, back etc",$images);
+
+
+//Add print are to ProductCreationTemplate
+$pct->addPrintArea($pat);
+
+```

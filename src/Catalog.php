@@ -14,7 +14,6 @@ class Catalog{
      */
     public function blueprint($id,$options = []) : Structures\Blueprint{
         $array=$this->client->request(APICatalogPath::blueprint($id), "GET", $options)->getArrayResponse();
-        print_r($array);
         return new Structures\Blueprint($array);
     }
 
