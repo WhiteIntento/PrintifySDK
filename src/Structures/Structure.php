@@ -30,6 +30,10 @@ class Structure{
         return $this->attributes[$key];
     }
 
+    public function getAttributes() : array{
+        return $this->attributes;
+    }
+
     /**
      * Този метод валидира данните в структурата спрямо задължителните атрибути
      * This method validates the data in the structure against the required attributes

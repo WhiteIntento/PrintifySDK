@@ -22,6 +22,9 @@ class Query{
             $this->status=false;
             $response=$e->getResponse();
         }
+        if(!($response->getStatusCode()==200 || $response->getStatusCode()==400)){
+            throw new Exceptions\PrintifyError($response->getReasonPhrase(),$response->getStatusCode());
+        }
         $this->response=$response;
         return $this;
     }
