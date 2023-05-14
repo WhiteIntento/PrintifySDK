@@ -33,7 +33,13 @@ class Product{
         return new Structures\Product($array);
     }
 
-
+    /**
+     * Този метод създава продукт в printify
+     * This method creates a product in printify
+     * @param int $shopId
+     * @param PureIntento\PrintifySdk\Structures\Templates\ProductCreationTemplate $productCreationTemplate
+     * @return array
+     */
     public function createProduct($shopId, ProductCreationTemplate | array $productCreationTemplate, $options = []) : array {
         if(is_array($productCreationTemplate)){
             $options["json"]=$productCreationTemplate;
@@ -43,6 +49,83 @@ class Product{
         $array=$this->client->request(APIProductPath::createProduct($shopId), "POST", $options)->getArrayResponse();
         return $array;
     }
+
+    /**
+     * Този метод обновява данните на продукт вече съществуващ в printify
+     * This method updates the data of a product already existing in printify
+     * @param $shopId
+     * @param $productId
+     * @param array $data
+     * @return array
+     */
+    public function updateProduct($shopId,$productId,array $data,array $options=[]){
+        $options["json"]=$data;
+        $array=$this->client->request(APIProductPath::updateProduct($shopId,$productId), "PUT", $options)->getArrayResponse();
+        return $array;
+    }
+
+    /**
+     * Този метод изтрива продукт вече съществуващ в printify
+     * This method deletes a product already  existing in printify
+     * @param $shopId
+     * @param $productId
+     * @return array
+     */
+
+     public function deleteProduct($shopId,$productId,$options = []){
+        $array=$this->client->request(APIProductPath::deleteProduct($shopId,$productId), "DELETE", $options)->getArrayResponse();
+        return $array;
+     }
+
+     /**
+      * Този метод публиква продукт вече съществуващ в printify
+      * This method publishes a product already existing in printify
+      * @param $shopId
+      * @param $productId
+      */
+
+      public function publish($shopId,$productId,$options = []){
+        $array=$this->client->request(APIProductPath::publishProduct($shopId,$productId), "POST", $options)->getArrayResponse();
+        return $array;
+      }
+
+      /**
+      * Този метод задава статус на успешна публикация
+      * Set product publish status to succeeded
+      * @param $shopId
+      * @param $productId
+      */
+
+      public function succeededPublish($shopId,$productId,$options = []){
+        $array=$this->client->request(APIProductPath::succeededPublishProduct($shopId,$productId), "POST", $options)->getArrayResponse();
+        return $array;
+      }
+
+      /**
+      * Този метод задава статус на неуспешна публикация
+      * Set product publish status to failed
+      * @param $shopId
+      * @param $productId
+      */
+
+      public function failedPublish($shopId,$productId,$options = []){
+        $array=$this->client->request(APIProductPath::failedPublishProduct($shopId,$productId), "POST", $options)->getArrayResponse();
+        return $array;
+      }
+
+
+      /**
+      * Този метод уведомява че продукта има отменена публикация
+      * Notify that a product has been unpublished
+      * @param $shopId
+      * @param $productId
+      */
+
+      public function unpublish($shopId,$productId,$options = []){
+        $array=$this->client->request(APIProductPath::unpublish($shopId,$productId), "POST", $options)->getArrayResponse();
+        return $array;
+      }
+
 
   
 }

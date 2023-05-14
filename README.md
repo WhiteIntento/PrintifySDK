@@ -147,3 +147,23 @@ $pat->addPlaceholder("Blueprint Provider variant position. For example, it can b
 $pct->addPrintArea($pat);
 
 ```
+
+<h2>How to update,delete,publish,sucessedPublish failedPublish and, unpublish product</h2>
+
+```php
+use PureIntento\PrintifySdk\Product;
+use PureIntento\PrintifySdk\PrintifyClient;
+
+$authToken="YOU_AUTH_TOKEN_HERE";
+$client=new PrintifyClient($authToken);
+
+$product= new Product($client);
+
+$shopId="SHOP ID HERE";
+$product->updateProduct($shopId,"PRODUCT ID HERE",[
+    "title"=>"NEW TITLE"
+]);
+
+$product->deleteProduct($shopId,"PRODUCT ID HERE")
+
+```
