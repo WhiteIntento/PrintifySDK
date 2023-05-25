@@ -30,6 +30,10 @@ class Structure{
         return $this->attributes[$key];
     }
 
+    public function __set($key,$value){
+        $this->attributes[$key]=$value;
+    }
+
     public function getAttributes() : array{
         return $this->attributes;
     }
