@@ -82,9 +82,22 @@ class Product{
       * This method publishes a product already existing in printify
       * @param $shopId
       * @param $productId
+      * @param $publishData publish content like title ,description, images, variants, tags,keyFeatures,shipping_template
       */
 
-      public function publish($shopId,$productId,$options = []){
+      public function publish($shopId,$productId,$publishData = null, $options = []){
+        if(is_null($publishData)){
+          if(!array_key_exists("json",$options)){
+            $options["json"]=[];
+          }
+          $options["json"]["title"]=true;
+          $options["json"]["description"]=true;
+          $options["json"]["images"]=true;
+          $options["json"]["variants"]=true;
+          $options["json"]["tags"]=true;
+          $options["json"]["keyFeatures"]=true;
+          $options["json"]["shipping_template"]=true;
+        }
         $array=$this->client->request(APIProductPath::publishProduct($shopId,$productId), "POST", $options)->getArrayResponse();
         return $array;
       }
@@ -96,7 +109,15 @@ class Product{
       * @param $productId
       */
 
-      public function succeededPublish($shopId,$productId,$options = []){
+      public function succeededPublish($shopId,$productId,$externalId,$externalHandel,$options = []){
+        if(!array_key_exists("json",$options)){
+          $options["json"]=[];
+        } 
+        if(!array_key_exists("external",$options["json"])){
+          $options["json"]["external"]=[];
+        }
+        $options["json"]["external"]["id"]=$externalId;
+        $options["json"]["external"]["handle"]=$externalHandel;
         $array=$this->client->request(APIProductPath::succeededPublishProduct($shopId,$productId), "POST", $options)->getArrayResponse();
         return $array;
       }
@@ -108,7 +129,8 @@ class Product{
       * @param $productId
       */
 
-      public function failedPublish($shopId,$productId,$options = []){
+      public function failedPublish($shopId,$productId,$reason="",$options = []){
+        $options["json"]["reason"]=$reason;
         $array=$this->client->request(APIProductPath::failedPublishProduct($shopId,$productId), "POST", $options)->getArrayResponse();
         return $array;
       }

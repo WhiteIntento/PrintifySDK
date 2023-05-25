@@ -166,4 +166,10 @@ $product->updateProduct($shopId,"PRODUCT ID HERE",[
 
 $product->deleteProduct($shopId,"PRODUCT ID HERE")
 
+
+print_r($product->publish($shopId,"product_id"));
+print_r($product->succeededPublish($shopId,"646fb1cc84d647f62800b424","you product id","you product handle example url"));
+print_r($product->failedPublish($shopId,"646fb1cc84d647f62800b424","reason for failed"));
+print_r($product->unpublish($shopId,"646fb1cc84d647f62800b424"));
+
 ```
